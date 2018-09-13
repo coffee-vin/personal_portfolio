@@ -1,0 +1,344 @@
+@import'config';
+@import'menu';
+
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    @include background;
+    background: $primary-color;
+    color: set-text-color($primary-color);
+    height: 100%;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serifs;
+    line-height: 1.5;
+}
+
+//headings
+h1, 
+h2, 
+h3 {
+    margin: 0;
+    font-weight: 400;
+
+    &.lg-heading{
+        font-size: 6rem;
+    }
+    &.sm-heading{
+        margin-bottom: 2rem;
+        padding: 0.2rem 1rem;
+        background: rgbe(lighten($primary-color,2),0.5);
+    }
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+header{
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+}
+
+.text-secondary{
+color: $secondary-color;
+}
+
+main{
+    padding: 4rem;
+    min-height: calc(100vh - 50px);
+    .icons{
+        margin-top: 1rem;
+        a{
+            padding: 0.4rem;
+            &:hover{
+                color: $secondary-color;
+                @include easeOut();
+            }
+        }
+    }
+    &#home{
+        text-align: center;
+        overflow: hidden;
+        h1{
+            margin-top: 20vh;
+        }
+    }
+}
+
+//about
+.about-info{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-areas: 
+    'bioimage bio bio'
+    'job1 job2 job3';
+    grid-template-columns: repeat(3,1fr);
+
+    
+.bio-image{
+    grid-area: bioimage;
+    margin: auto;
+    border-radius: 50%;
+    border:$secondary-color 5px solid;
+}
+
+.bio{
+    grid-area: bio;
+    font-size: 1.3rem;
+}
+
+.job-1{
+    grid-area: job1;
+}
+
+.job-2{
+    grid-area: job2;
+}
+
+.job-3{
+    grid-area: job3;
+}
+
+.job{
+    background: lighten($primary-color, 5);
+    padding: 0.5rem;
+    border-top: $secondary-color 2px solid;
+    border-bottom: $secondary-color 10px solid;
+}
+}
+
+//work
+.projects{
+    display: grid;
+    grid-gap: 0.7rem;
+    grid-template-columns: repeat(3,1fr);
+
+
+    img{
+        width: 100%;
+        border:3px solid #fff;
+
+        &:hover{
+            opacity: 0.5;
+            border-color: $secondary-color;
+            @include easeOut;
+        }
+    }
+}
+
+//contact
+.boxes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1rem;
+
+    div{
+        font-size: 2rem;
+        border: 3px solid #fff;
+        padding: 1.5rem 2.5rem;
+        margin-bottom: 3rem;
+        @include easeOut; 
+
+        &:hover{
+            padding: 0.5rem 1.5rem;
+            background: $secondary-color;
+            color: set-text-color($secondary-color);
+            span{
+            color: set-text-color($secondary-color);
+            }
+        }
+    }
+}
+
+//button style
+.btn{
+    display: block;
+    padding: 0.5rem 1rem;
+    border: 0;
+    margin-bottom: 0.3rem;
+    &:hover{
+        background: $secondary-color;
+        color: set-text-color($secondary-color);
+    }
+}
+
+.btn-dark{
+    @extend .btn;
+    background: darken($primary-color,50);
+    color: #fff;
+}
+.btn-light{
+    @extend .btn;
+    background: lighten($primary-color,50);
+    color: #333;
+}
+
+
+#main-footer{
+    text-align: center;
+    padding: 1rem;
+    background: darken($primary-color,10);
+    color: set-text-color($primary-color);
+    height: 60px;
+}
+
+//accordion
+@font-face{
+    font-family: 'Genericons';
+    src: url('../fonts/genericons-regular-webfont.woff')format('woff'),
+         url('../fonts/genericons-regular-webfont.eot')format('truetype');
+}
+
+#social{
+    margin: auto auto;
+    width: 90%;
+
+    h1,h2{
+        color: $secondary-color;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .accordion{
+        background: $primary-color;
+        width: 100%;
+        min-width: 800px;
+        display: block;
+        list-style: none;
+        overflow: hidden;
+        height: 200px;
+        font-size: 0;
+    }
+    .tab{
+        display: inline-block;
+        background: $primary-color;
+        border-right: $secondary-color solid 1px;
+        width: 80px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        margin: 0;
+        transition: all 0.5s ease-in-out 0.1s;
+        &:hover{
+            width: 450px;
+        }
+ 
+
+        &:hover .social a:before{
+            margin-left: -100px;
+        }
+
+        &:hover .social a:after{
+            margin-left: -5px;
+        }
+    
+        & .content{
+       
+            background: #fff;
+            width: 360px;
+            height: 200px;
+            margin-left: 80px;
+            position: relative;
+            padding: 50px 0 0 15px;
+        }
+
+        & .content h1{
+            font-size: 2.5rem;
+            margin-bottom: 10px;    
+        }
+        & .content h2{
+            font-size: 1.5rem;
+            margin-bottom: 10px;    
+        }
+
+
+    }
+     .social a:before,
+     .social a:after{
+        transition: all 0.4s ease-in-out 0.1s;
+        width: 80px;
+        height: 200px;
+        position: absolute;
+        text-indent: 0;
+        padding-top: 90px;
+        padding-left: 25px;
+        display: block;
+        font: normal 30px Genericons;
+        color: #fff;
+    }
+    .social a:after{
+        font-size: 48px;
+        padding-left: 20px;
+        padding-top: 80px;
+        margin-left: 85px;
+    }
+
+    .phone a:before,
+    .phone a:after{
+       content: '\f437'
+   }
+    .phone a:after{
+       background-color: #000 ;
+   }
+
+   .gmail a:before,
+   .gmail a:after{
+      content: '\f206'
+  }
+   .gmail a:after{
+      background-color: #dd4b39 ;
+  }
+
+
+    .facebook a:before,
+    .facebook a:after{
+       content: '\f203'
+   }
+    .facebook a:after{
+       background-color: #3B5998 ;
+   }
+
+   .twitter a:before,
+   .twitter a:after{
+      content: '\f202'
+  }
+   .twitter a:after{
+      background-color: #1DA1F2;
+  }
+  .linkedin a:before,
+  .linkedin a:after{
+     content: '\f208'
+ }
+  .linkedin a:after{
+     background-color: #0077B5;
+ }
+
+  .github a:before,
+  .github a:after{
+     content: '\f200'
+ }
+  .github a:after{
+     background-color: #211F1F;
+ }
+
+ .skype a:before,
+ .skype a:after{
+    content: '\f220'
+}
+ .skype a:after{
+    background-color: #00aff0 ;
+}
+
+
+}
+
+
+
+@import'mobile';

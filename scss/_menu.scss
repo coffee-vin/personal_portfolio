@@ -1,0 +1,170 @@
+// menu btn
+
+.menu-btn{
+    position: absolute;
+    z-index: 3;
+    right: 35px;
+    top: 35px;
+    cursor: pointer;
+    @include easeOut;
+
+    .btn-line{
+        width: 28px;
+        height: 4px;
+        margin: 0 0 5px 0;
+        background: set-text-color($primary-color);
+        @include easeOut; 
+    }
+
+    //rotate into x with menu line
+     &.close{
+         transform: rotate(180deg);
+         
+        // border-radius: 50%; 
+         .btn-line{
+             // line 1 - rotate
+            &:nth-child(1){
+                transform: rotate(45deg) translate(5px, 5px);
+                background: $secondary-color;
+            }
+             //line 2 - hide
+             &:nth-child(2){
+                opacity: 0;
+            }
+             //line 3 - rotate
+             &:nth-child(3){
+                transform: rotate(-45deg) translate(8px, -7px);
+                background: $secondary-color;
+            }
+         }
+     }
+}
+
+//mune overlay
+.menu{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 1;
+    visibility: hidden;
+
+    &.show{
+        visibility: visible;
+    }
+    
+    &-branding, 
+    &-nav,
+    &-branding2{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 33.33%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &-nav{
+        margin: 0;
+        padding: 0;
+        background: darken($primary-color, 5);
+        list-style: none;
+        transform: translate3d(-100%,0,0);
+        @include easeOut;
+
+        &.show{
+            //slide in from top
+            transform: translate3d(0,0,0);
+        }
+    }
+
+    //brandin side
+    &-branding{
+        background: $primary-color;
+        // transform: translate3d(100%,0,0);
+        transform: translate3d(0,200%,0);
+        @include easeOut;
+        
+        &.show{
+            //slide in from bottom 
+            transform: translate3d(0,0,0);
+        }
+        .portrait{
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 13px solid $secondary-color;
+            background: url(../img/me.jpg);
+        }
+    }
+
+        //brandin side2
+        &-branding2{
+            margin-top: 0;
+            list-style: none;
+            background: darken($primary-color, 5);
+            // transform: translate3d(0,200%,0);
+            transform: translate3d(100%,0,0);
+            @include easeOut;
+            
+            &.show{
+                //slide in from bottom 
+                transform: translate3d(0,0,0);
+            }
+
+        }
+
+    .nav-item{     
+        width: 100%;
+        text-align: center;
+        transform: translate3d(600px,0,0);
+        @include easeOut;
+
+        &.show{
+            //slide in from right 
+            transform: translate3d(0,0,0);
+        }
+        &.current > a{
+            color: $secondary-color;
+        }
+    }
+
+    .item2{     
+        width: 100%;
+        text-align: center;
+        transform: translate3d(-600px,0,0);
+        @include easeOut;
+
+        &.show{
+            //slide in from right 
+            transform: translate3d(0,0,0);
+        }
+        &.current > a{
+            color: $secondary-color;
+        }
+    }
+
+    .navlink{
+        display: inline-block;
+        position: relative;
+        font-size: 30px;
+        text-transform: uppercase;
+        padding: 1rem 0; 
+        font-weight: 300;
+        color: set-text-color($primary-color);
+        text-decoration: none;
+        @include easeOut;
+
+        &:hover{
+            color: $secondary-color;
+        }
+    }
+}
+
+//delay each nav item slide 0.1s
+@for $x from 1 through 4{
+    .nav-item:nth-child(#{$x}){
+        transition-delay: $x * 0.1s;
+    }
+}
